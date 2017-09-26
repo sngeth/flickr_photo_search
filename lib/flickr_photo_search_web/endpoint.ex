@@ -1,6 +1,10 @@
 defmodule FlickrPhotoSearchWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :flickr_photo_search
 
+  if Application.get_env(:flickr_photo_search, :sql_sandbox) do
+    plug Phoenix.Ecto.SQL.Sandbox
+  end
+
   socket "/socket", FlickrPhotoSearchWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.

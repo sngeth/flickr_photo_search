@@ -4,7 +4,9 @@ use Mix.Config
 # you can enable the server option below.
 config :flickr_photo_search, FlickrPhotoSearchWeb.Endpoint,
   http: [port: 4001],
-  server: false
+  server: true
+
+config :flickr_photo_search, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
@@ -17,3 +19,5 @@ config :flickr_photo_search, FlickrPhotoSearch.Repo,
   database: "flickr_photo_search_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :wallaby, screenshot_on_failure: true
