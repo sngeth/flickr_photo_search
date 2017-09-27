@@ -8,7 +8,7 @@ defmodule FlickrApi do
   end
 
   def request_url(text) do
-    api_url <> "?api_key=#{api_key}&method=flickr.photos.search&text=#{text}&format=json&nojsoncallback=1"
+    api_url <> "?api_key=#{api_key()}&method=flickr.photos.search&text=#{text}&format=json&nojsoncallback=1"
   end
 
   def api_url do
