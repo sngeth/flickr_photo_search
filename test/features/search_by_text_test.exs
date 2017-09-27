@@ -1,12 +1,18 @@
 defmodule SearchByTextTest do
   use FlickrPhotoSearch.FeatureCase, async: true
 
-  test "the page has a title", %{session: session} do
-    header = session
+  test "the page has a search box", %{session: session} do
+    session
     |> visit("/")
-    |> find(Query.css("h2"))
-    |> Element.text
+    |> assert_has(Query.css("input#q"))
+  end
 
-    assert header =~ ~r/Welcome to Flickr Photo Search/i
+  def fill_in_search(session, query) do
+    session
+    |> fill_in(Query.text_field("q"), with: query)
+    |> click(Query.button("Search"))
+  end
+
+  test "user can search Flickr API", %{session: session} do
   end
 end
