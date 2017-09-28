@@ -2,6 +2,8 @@ defmodule FlickrApi do
   def search(text) do
     HTTPoison.start
 
+    text = URI.encode text
+
     HTTPoison.get!(request_url(text)).body
     |> Poison.decode!
     |> map_urls

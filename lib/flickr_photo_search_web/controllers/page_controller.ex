@@ -6,7 +6,13 @@ defmodule FlickrPhotoSearchWeb.PageController do
   end
 
   def search(conn, params) do
-    photo_urls = FlickrApi.search(params["q"])
-    render conn, "index.html", photo_urls: photo_urls
+    if params["q"] == "" do
+      conn
+      |> put_flash(:error, "Search term cannot be blank")
+      |> render "index.html", photo_urls: []
+    else
+      photo_urls = FlickrApi.search(params["q"])
+      render conn, "index.html", photo_urls: photo_urls
+    end
   end
 end

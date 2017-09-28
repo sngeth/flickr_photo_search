@@ -17,4 +17,16 @@ defmodule FlickrApiTest do
         ~r/https:\/\/farm\d+.staticflickr.com\/\d+\/\d+_[a-zA-Z\d]+_m.jpg/
     end
   end
+
+  test "searches with spaces work successfully" do
+    ExVCR.Config.filter_url_params(true)
+
+    use_cassette "flickr_api/get_photos#2" do
+      urls = FlickrApi.search("lol cat")
+
+      assert length(urls) == 100
+      assert hd(urls) =~
+        ~r/https:\/\/farm\d+.staticflickr.com\/\d+\/\d+_[a-zA-Z\d]+_m.jpg/
+    end
+  end
 end
